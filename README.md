@@ -1,6 +1,4 @@
-# Praktikum_AI_Workflow
-
-## Deskripsi Singkat
+## Deskripsi
 Proyek ini bertujuan untuk menerapkan kecerdasan buatan (AI) dalam menganalisis data penjualan toko alat tulis. Dengan memanfaatkan teknik machine learning, sistem akan membantu dalam mengevaluasi tren penjualan, mengidentifikasi produk yang perlu di-restock, dan memberikan wawasan berbasis data untuk pengambilan keputusan yang lebih baik.
 
 ## Instruksi Cara Menjalankan Kode
