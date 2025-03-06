@@ -1,46 +1,42 @@
-## Deskripsi
-Proyek ini bertujuan untuk menerapkan kecerdasan buatan (AI) dalam menganalisis data penjualan toko alat tulis. Dengan memanfaatkan teknik machine learning, sistem akan membantu dalam mengevaluasi tren penjualan, mengidentifikasi produk yang perlu di-restock, dan memberikan wawasan berbasis data untuk pengambilan keputusan yang lebih baik.
+## **Deskripsi**
+Proyek ini bertujuan untuk menerapkan kecerdasan buatan (AI) dalam analisis penjualan alat tulis. Sistem akan membantu dalam pencatatan data, analisis pola penjualan, dan memberikan rekomendasi restock berdasarkan data yang dikumpulkan. Dengan menggunakan teknik *machine learning*, proyek ini akan meningkatkan efisiensi pengelolaan stok di toko alat tulis.
 
-## Instruksi Cara Menjalankan Kode
-1. **Persiapan Data**
-   - Pastikan Anda memiliki dataset penjualan alat tulis dalam format CSV.
-   - Contoh data terdiri dari 50 transaksi dengan 10 jenis produk alat tulis.
-   - Upload file CSV ke Google Colab atau jalankan di lingkungan Python lokal.
+## **Instruksi Cara Menjalankan Kode**
+1. **Persiapan Lingkungan**
+   - Pastikan Anda memiliki Python terinstal.
+   - Instal pustaka yang dibutuhkan dengan perintah berikut:
+     ```bash
+     pip install pandas numpy scikit-learn matplotlib
+     ```
 
-2. **Menginstal dan Mengimpor Library yang Dibutuhkan**
-   ```python
-   import pandas as pd
-   import numpy as np
-   import matplotlib.pyplot as plt
-   from sklearn.model_selection import train_test_split
-   from sklearn.tree import DecisionTreeClassifier
-   from sklearn.metrics import accuracy_score
-   ```
+2. **Menyiapkan Data**
+   - Kode akan membuat dataset penjualan alat tulis dalam format CSV secara otomatis.
+   - File CSV akan disimpan dengan nama `data_penjualan_alattulis.csv`.
 
-3. **Membaca dan Memproses Data**
-   ```python
-   df = pd.read_csv("data_penjualan_alat_tulis.csv")
-   df["Tanggal"] = pd.to_datetime(df["Tanggal"])
-   df["Total Penjualan"] = df["Jumlah Terjual"] * df["Harga Satuan"]
-   df["Keuntungan"] = df["Total Penjualan"] - (df["Jumlah Terjual"] * 10000)
-   ```
+3. **Membaca dan Membersihkan Data**
+   - Data dari file CSV akan dibaca menggunakan *pandas*.
+   - Pengecekan dilakukan untuk memastikan tidak ada data kosong.
+   - Konversi format tanggal dilakukan agar sesuai dengan analisis.
 
-4. **Pelatihan Model AI**
-   ```python
-   X = df[["Jumlah Terjual", "Stok"]]
-   y = (df["Stok"] < 5).astype(int)
-   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-   model = DecisionTreeClassifier()
-   model.fit(X_train, y_train)
-   y_pred = model.predict(X_test)
-   print("Akurasi Model:", accuracy_score(y_test, y_pred))
-   ```
+4. **Transformasi Data**
+   - Kolom baru *Total Penjualan* dan *Keuntungan* akan ditambahkan berdasarkan perhitungan:
+     - `Total Penjualan = Jumlah Terjual × Harga Satuan`
+     - `Keuntungan = Total Penjualan - (Jumlah Terjual × 10.000)`
 
-5. **Visualisasi Data**
-   ```python
-   plt.scatter(df["Jumlah Terjual"], df["Stok"], c=df["Keuntungan"], cmap="coolwarm")
-   plt.xlabel("Jumlah Terjual")
-   plt.ylabel("Stok")
-   plt.title("Analisis Penjualan dan Stok Alat Tulis")
-   plt.colorbar(label="Keuntungan")
-   plt.show()
+5. **Pelatihan Model AI**
+   - Data dipisahkan menjadi *training set* (80%) dan *testing set* (20%).
+   - *Decision Tree Classifier* digunakan untuk memprediksi apakah stok produk perlu di-restock.
+   - Model dievaluasi menggunakan *accuracy_score*.
+
+6. **Prediksi Restock Produk**
+   - Model akan memprediksi apakah suatu produk perlu di-restock berdasarkan jumlah terjual dan stok yang tersisa.
+
+7. **Visualisasi Data**
+   - Data divisualisasikan menggunakan *Matplotlib* dengan *scatter plot* untuk melihat hubungan antara jumlah terjual, stok, dan keuntungan.
+
+8. **Menjalankan Program**
+   - Jalankan kode Python menggunakan perintah:
+     ```bash
+     python nama_file.py
+     ```
+   - Program akan menampilkan analisis data, hasil prediksi restock, serta grafik hubungan penjualan dan stok.
